@@ -1,4 +1,4 @@
-# Welford IAG Support Portal – Next.js Knowledge Base & Documentation Site
+# Support Portal – Next.js Knowledge Base & Documentation Site
 
 ![Welford IAG Support Portal Demo](https://raw.githubusercontent.com/AATHILDUCKY/nextjs-documentation-template/refs/heads/main/ezgif-1bbd70ea805d2c3f.gif)
 
