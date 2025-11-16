@@ -1,5 +1,9 @@
 # Welford IAG Support Portal (Next.js + Tailwind)
 
+![Demo GIF](https://raw.githubusercontent.com/AATHILDUCKY/nextjs-documentation-template/refs/heads/main/ezgif-1bbd70ea805d2c3f.gif)
+
+
+
 This is a clean, from-scratch **support portal** for Welford IAG with:
 
 - Next.js 14 (App Router)
