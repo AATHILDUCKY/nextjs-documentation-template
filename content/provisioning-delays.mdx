@@ -1,0 +1,82 @@
+---
+title: "Investigating Provisioning Delays for New Accounts"
+description: "How to trace, debug, and resolve delays when new users or access changes do not appear in Welford IAG."
+date: "2025-11-16"
+tags:
+  - provisioning
+  - sync
+  - jobs
+  - troubleshooting
+category: "Operations"
+keywords:
+  - provisioning delay
+  - account sync
+  - background jobs
+---
+
+# Investigating Provisioning Delays
+
+If a user has been **created or updated in the source system** (HR, AD, etc.)
+but the changes are not visible in Welford IAG, use this runbook.
+
+## 1. Confirm expectations
+
+Verify with the requester:
+
+- Which **system of record** was updated (HR, AD, CSV import, etc.).
+- When the change was made.
+- What they expected to see in IAG (new account, new role, deprovisioning).
+
+## 2. Check the provisioning schedule
+
+Go to the **Job / Scheduler monitoring** dashboard and confirm:
+
+- The last successful run time and duration.
+- Any failed runs in the last 24 hours.
+- Queued or stuck jobs.
+
+If jobs are failing, capture:
+
+- Error message
+- Stack trace
+- Affected connector (e.g. `HR -> IAG`, `IAG -> AD`).
+
+## 3. Inspect connector configuration
+
+For the relevant connector, review:
+
+- Connection / credential validity.
+- Filter configuration (OUs, attributes, group filters).
+- Recent configuration changes (test vs prod endpoints, throttling).
+
+## 4. Sample a specific user
+
+Attempt to pull a single sample user from the source:
+
+- Run a **test query** in the connector configuration.
+- Confirm the user appears in the raw result.
+- Validate key attributes (unique ID, email, status flags).
+
+If the user doesn&apos;t appear here, the issue is **upstream** of IAG.
+
+## 5. Re-run and re-check
+
+If safe, trigger a **manual sync** for the affected connector and monitor:
+
+- Queue depth and progress.
+- Errors for that specific user ID.
+
+Once the account appears in IAG, verify:
+
+- Correct roles and entitlements
+- Correct lifecycle state (active, leaver, etc.)
+
+## 6. Document the incident
+
+Add a short note to your internal incident/problem tracker with:
+
+- Root cause
+- Resolution steps
+- Any tuning applied (e.g. schedule, batch size, retry policy)
+
+This helps future provisioning incidents get resolved much faster.

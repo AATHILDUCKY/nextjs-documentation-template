@@ -1,0 +1,87 @@
+---
+title: "Troubleshooting Login Failures in Welford IAG"
+description: "Step-by-step guide to analyze and resolve common login issues across local accounts and SSO providers."
+date: "2025-11-16"
+tags:
+  - login
+  - authentication
+  - sso
+  - troubleshooting
+category: "Troubleshooting"
+keywords:
+  - login failure
+  - authentication error
+  - sso
+  - invalid credentials
+---
+
+# Troubleshooting Login Failures in Welford IAG
+
+When a user reports that they **cannot log in**, walk through this checklist
+before escalating.
+
+## 1. Confirm the error pattern
+
+Ask the user for:
+
+- Exact error message (or screenshot)
+- Approximate time of the last failed attempt
+- Whether this affects **only them** or **multiple users**
+
+From the UI, note whether the failure happens:
+
+- Before the identity provider redirect (local auth), or
+- After returning from SSO (Azure AD, Okta, etc.).
+
+## 2. Check basic account status
+
+1. Open the **IAG admin portal**.
+2. Navigate to the **Users** section.
+3. Search using **email address** or **employee ID**.
+4. Verify that:
+   - The account is *active*.
+   - The assigned roles are correct.
+   - The account is not locked or disabled.
+
+If the account is missing:
+
+- Confirm that the **HR/source system sync job** has run successfully.
+- Trigger a manual sync where allowed, then re-check.
+
+## 3. Validate SSO configuration
+
+For SSO flows (Azure AD / IdP):
+
+- Confirm the **application registration** is not disabled.
+- Check that the **redirect URL** matches the URL configured in IAG.
+- Validate that the **certificate or client secret** is not expired.
+- Confirm the user is assigned to the correct **enterprise app** in the IdP.
+
+If the error is `invalid audience` or `invalid issuer`, re-check the **metadata
+URL** and application ID configuration.
+
+## 4. Inspect logs
+
+Use the platform monitoring (e.g., Azure Application Insights, centralized logs)
+to filter by:
+
+- user ID or email,
+- correlation ID (if shown in the error),
+- time range (±5 minutes around the reported time).
+
+Look for:
+
+- Token validation errors
+- Expired tokens
+- Clock skew issues between services
+- Network or timeout errors contacting the IdP
+
+## 5. Apply common fixes
+
+- Resync the user from the source directory.
+- Re-grant application access in the IdP.
+- Renew or update any expired SSO certificates.
+- Clear cached tokens/session cookies and attempt again.
+
+Document the **root cause** and **final fix** in this writeup so it can be
+reused by the next person facing the same issue.

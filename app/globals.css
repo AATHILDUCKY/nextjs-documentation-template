@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+/* Plain, professional page background */
+.support-gradient-bg {
+  @apply bg-slate-50;
+}
+
+/* Light, clean card – mainly for home sections */
+.support-card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-brand-soft;
+}
+
+/* Subtle chips for tags / labels */
+.support-chip {
+  @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700;
+}
+
+input::placeholder {
+  @apply text-slate-400;
+}
+
+/* ----------------------------- */
+/* Markdown / article styling    */
+/* ----------------------------- */
+
+.markdown-body {
+  @apply text-[15px] leading-relaxed text-slate-800;
+}
+
+/* Headings */
+.markdown-body h1 {
+  @apply mt-6 mb-3 text-3xl font-semibold text-slate-900;
+}
+
+.markdown-body h2 {
+  @apply mt-8 mb-3 text-2xl font-semibold text-slate-900;
+}
+
+.markdown-body h3 {
+  @apply mt-6 mb-2 text-xl font-semibold text-slate-900;
+}
+
+.markdown-body h4 {
+  @apply mt-5 mb-2 text-base font-semibold text-slate-900;
+}
+
+/* Paragraphs */
+.markdown-body p {
+  @apply mt-3 mb-3 text-[15px] leading-relaxed text-slate-800;
+}
+
+/* Lists */
+.markdown-body ul {
+  @apply mt-3 mb-3 list-disc space-y-1 pl-6 text-[15px] text-slate-800;
+}
+
+.markdown-body ol {
+  @apply mt-3 mb-3 list-decimal space-y-1 pl-6 text-[15px] text-slate-800;
+}
+
+.markdown-body li > ul,
+.markdown-body li > ol {
+  @apply mt-1 mb-1;
+}
+
+/* Blockquote */
+.markdown-body blockquote {
+  @apply my-6 border-l-4 border-slate-200 bg-slate-50 px-4 py-3 text-[15px] italic text-slate-700;
+}
+
+/* Horizontal rule */
+.markdown-body hr {
+  @apply my-8 border-t border-dashed border-slate-200;
+}
+
+/* Inline code `like this` – reduced vertical padding */
+.markdown-body code:not(pre code) {
+  @apply rounded bg-slate-100 px-1.5 py-px text-[13px] font-mono text-[#1C3E66];
+}
+
+/* Code blocks ```bash ...``` etc */
+.markdown-body pre {
+  @apply relative mt-4 mb-6 overflow-x-auto rounded-xl bg-slate-950 text-slate-50;
+}
+
+.markdown-body pre code {
+  @apply block min-w-full whitespace-pre p-4 text-[13px] font-mono leading-relaxed;
+}
+
+/* Tables */
+.markdown-body table {
+  @apply my-4 w-full border-collapse text-sm;
+}
+
+.markdown-body th,
+.markdown-body td {
+  @apply border border-slate-200 px-3 py-2 text-left align-top;
+}
+
+.markdown-body th {
+  @apply bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-700;
+}
+
+.markdown-body tr:nth-child(even) td {
+  @apply bg-slate-50;
+}
+
+/* Links */
+.markdown-body a {
+  @apply font-medium text-[#1C3E66] underline-offset-2 hover:underline;
+}
+
+/* Images in markdown */
+.markdown-body img {
+  @apply my-4 rounded-xl border border-slate-200;
+}
+
+/* Keyboard shortcuts */
+.markdown-body kbd {
+  @apply rounded border border-slate-300 bg-slate-50 px-1.5 py-0.5 text-[11px] font-mono text-slate-700;
+}
